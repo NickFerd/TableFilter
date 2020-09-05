@@ -1,0 +1,62 @@
+{% load bootstrap4 %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>Table</title>
+
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+
+</head>
+<body>
+
+<table class="table">
+    <thead>
+    <tr>
+        <th>client_id</th>
+        <th>equipment_id</th>
+        <th>start</th>
+        <th>stop</th>
+        <th>mode_id</th>
+        <th>minutes</th>
+    </tr>
+    </thead>
+    <tbody>
+      {% for item in page_obj %}
+      <tr>
+          <td> {{ item.client_id }} </td>
+          <td> {{ item.equipment_id }} </td>
+          <td> {{ item.start }} </td>
+          <td> {{ item.stop }} </td>
+          <td> {{ item.mode_id }} </td>
+          <td> {{ item.minutes }} </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+</table>
+
+<div class="pagination">
+    <span class="step-links">
+        {% if page_obj.has_previous %}
+            <a href="?page=1">&laquo; first</a>
+            <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+        </span>
+
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}">next</a>
+            <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+        {% endif %}
+    </span>
+</div>
+
+</body>
+</html>
