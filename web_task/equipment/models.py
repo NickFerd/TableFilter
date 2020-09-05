@@ -2,7 +2,7 @@
 from django.db import models
 
 
-class Clients(models.Model):
+class Client(models.Model):
     id = models.AutoField(primary_key=True)
     name = models.TextField()
 
@@ -11,7 +11,7 @@ class Clients(models.Model):
         db_table = 'clients'
 
 
-class Durations(models.Model):
+class Duration(models.Model):
     id = models.AutoField(primary_key=True)
     client_id = models.IntegerField()
     equipment_id = models.IntegerField()
@@ -35,7 +35,7 @@ class Equipment(models.Model):
         db_table = 'equipment'
 
 
-class Modes(models.Model):
+class Mode(models.Model):
     id = models.AutoField(primary_key=True)
     name = models.TextField(unique=True, blank=True, null=True)
 

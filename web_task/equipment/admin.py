@@ -1,9 +1,9 @@
 from django.contrib import admin
 
-from .models import Clients, Modes, Equipment, Durations
+from .models import Client, Mode, Equipment, Duration
 
-admin.site.register(Clients)
-admin.site.register(Modes)
+admin.site.register(Client)
+admin.site.register(Mode)
 admin.site.register(Equipment)
 
 
