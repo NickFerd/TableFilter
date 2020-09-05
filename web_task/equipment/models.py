@@ -42,3 +42,6 @@ class Modes(models.Model):
     class Meta:
         managed = False
         db_table = 'modes'
+
+    def __str__(self):
+        return self.name
