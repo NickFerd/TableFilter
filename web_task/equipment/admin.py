@@ -1,3 +1,9 @@
 from django.contrib import admin
 
-# Register your models here.
+from .models import Clients, Modes, Equipment, Durations
+
+admin.site.register(Clients)
+admin.site.register(Modes)
+admin.site.register(Equipment)
+
+
