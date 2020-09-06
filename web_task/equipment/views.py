@@ -42,13 +42,11 @@ def index(request):
                 query = query.filter(stop__date=form.cleaned_data['stop_date'])
 
             if form.cleaned_data['start_hour']:
-                query = query.filter(start__time=form.cleaned_data['start_hour'])
+                query = query.filter(start__time__gte=form.cleaned_data['start_hour'])
 
             if form.cleaned_data['stop_hour']:
-                query = query.filter(stop__time=form.cleaned_data['stop_hour'])
+                query = query.filter(stop__time__lte=form.cleaned_data['stop_hour'])
 
-
-            #print(query)
             # Manage pagination with set filters
             q = request.GET.copy()
             try:
