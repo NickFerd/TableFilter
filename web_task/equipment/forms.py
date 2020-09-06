@@ -31,4 +31,6 @@ class DurationFilterForm(forms.Form):
                                   validators=[validate_positive])
     start_date = forms.DateField(label='Начало (YYYY-MM-DD)', required=False)
     stop_date = forms.DateField(label='Конец (YYYY-MM-DD)', required=False)
+    start_hour = forms.TimeField(label='Время начала (%H:%M)', required=False)
+    stop_hour = forms.TimeField(label='Время окончания (%H:%M)', required=False)
 

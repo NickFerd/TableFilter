@@ -1,4 +1,3 @@
-
 from django.shortcuts import render
 from django.core.paginator import Paginator
 
@@ -15,6 +14,7 @@ def paginate(queryset, request):
 
 def index(request):
     if request.method == 'POST':
+        # Drop all filters
         form = DurationFilterForm()
         query = Duration.objects.all().order_by('start')
         link_querystring = ''
@@ -22,7 +22,7 @@ def index(request):
         query = Duration.objects.all().order_by('start')
         form = DurationFilterForm(request.GET)
         if form.is_valid():
-            # Filter query according to params (refactor all option)
+            # Apply filters
             if form.cleaned_data['client'] and '-100' not in form.cleaned_data['client']:
                 query = query.filter(client_id__in=form.cleaned_data['client'])
 
@@ -32,11 +32,24 @@ def index(request):
             if form.cleaned_data['equip'] and '-100' not in form.cleaned_data['equip']:
                 query = query.filter(equipment_id__in=form.cleaned_data['equip'])
 
-            # time management
-            if form.cleaned_data['start_date']:
-                query = query.filter(start=form.cleaned_data['start_date'])
+            if form.cleaned_data['duration']:
+                query = query.filter(minutes=form.cleaned_data['duration'])
 
-            print(form.cleaned_data['client'])
+            if form.cleaned_data['start_date']:
+                query = query.filter(start__date=form.cleaned_data['start_date'])
+
+            if form.cleaned_data['stop_date']:
+                query = query.filter(stop__date=form.cleaned_data['stop_date'])
+
+            if form.cleaned_data['start_hour']:
+                query = query.filter(start__time=form.cleaned_data['start_hour'])
+
+            if form.cleaned_data['stop_hour']:
+                query = query.filter(stop__time=form.cleaned_data['stop_hour'])
+
+
+            #print(query)
+            # Manage pagination with set filters
             q = request.GET.copy()
             try:
                 q.pop('page')
@@ -47,6 +60,3 @@ def index(request):
     page_obj = paginate(query, request)
     context = {'form': form, 'page_obj': page_obj, 'link_querystring': link_querystring}
     return render(request, 'equipment/index.html', context)
-
-
-
