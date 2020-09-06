@@ -22,20 +22,21 @@ def index(request):
         query = Duration.objects.all().order_by('start')
         form = DurationFilterForm(request.GET)
         if form.is_valid():
-            # Filter query according to params
-            if form.cleaned_data['client'] and form.cleaned_data['client'] != -100:
+            # Filter query according to params (refactor all option)
+            if form.cleaned_data['client'] and '-100' not in form.cleaned_data['client']:
                 query = query.filter(client_id__in=form.cleaned_data['client'])
 
-            if form.cleaned_data['mode'] and form.cleaned_data['mode'] != -100:
+            if form.cleaned_data['mode'] and '-100' not in form.cleaned_data['mode']:
                 query = query.filter(mode_id__in=form.cleaned_data['mode'])
 
-            if form.cleaned_data['equip'] and form.cleaned_data['equip'] != -100:
+            if form.cleaned_data['equip'] and '-100' not in form.cleaned_data['equip']:
                 query = query.filter(equipment_id__in=form.cleaned_data['equip'])
 
             # time management
             if form.cleaned_data['start_date']:
                 query = query.filter(start=form.cleaned_data['start_date'])
 
+            print(form.cleaned_data['client'])
             q = request.GET.copy()
             try:
                 q.pop('page')
