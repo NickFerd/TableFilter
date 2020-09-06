@@ -15,8 +15,8 @@ class Duration(models.Model):
     id = models.AutoField(primary_key=True)
     client_id = models.IntegerField()
     equipment_id = models.IntegerField()
-    start = models.TextField()
-    stop = models.TextField()
+    start = models.DateTimeField()
+    stop = models.DateTimeField()
     mode_id = models.IntegerField()
     minutes = models.IntegerField()
 
