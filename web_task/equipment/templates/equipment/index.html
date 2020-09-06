@@ -20,7 +20,12 @@
     <!-- Sidebar -->
     <div class="bg-light border-right" id="sidebar-wrapper">
         <div class="sidebar-heading"><b>Table Sort</b></div>
-        <div>Dummy content</div>
+        <div>
+            <form action="" method="get">
+                {{ form.as_p }}
+                <input type="submit" value="Filter">
+            </form>
+        </div>
     </div>
 
 
