@@ -1,7 +1,11 @@
-# ignore folder
-__pycache__
 .idea
 virt
+
+__pycache__/
+*/__pycache__/
+*.py[cod]
+.pyc
+*.pyc
 
 
 
