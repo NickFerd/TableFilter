@@ -4,11 +4,13 @@ from .models import Client, Mode, Equipment
 
 
 def get_list(model):
+    """Function to retrieve names from Models
+    returns a list of tuples"""
     objects = model.objects.all()
     obj_list = []
     for obj in objects:
         obj_list.append((obj.id, obj.name))
-    obj_list.append((-100, 'All'))
+    obj_list.append((-100, 'All'))  # -100 is chosen because it is unlikely to be an id in a model
     return obj_list
 
 
@@ -21,6 +23,7 @@ def validate_positive(value):
 
 
 class DurationFilterForm(forms.Form):
+    """Form for filtering the table"""
     client = forms.MultipleChoiceField(choices=get_list(Client), label='Клиенты',
                                        required=False)
     mode = forms.MultipleChoiceField(choices=get_list(Mode), label='Режим работы',

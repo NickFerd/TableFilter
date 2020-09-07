@@ -1,0 +1,8 @@
+# ignore folder
+__pycache__
+.idea
+virt
+
+
+
+

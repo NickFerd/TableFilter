@@ -6,6 +6,7 @@ from .forms import DurationFilterForm
 
 
 def paginate(queryset, request):
+    """Pagination function"""
     paginator = Paginator(queryset, 20)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
